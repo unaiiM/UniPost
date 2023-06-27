@@ -1,0 +1,22 @@
+{
+  "name": "unipost",
+  "version": "1.0.0",
+  "description": "Advanced HTTP/HTTPS request UI Tool",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unaiiM/UniPost.git"
+  },
+  "author": "Unai Mató Pi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unaiiM/UniPost/issues"
+  },
+  "homepage": "https://github.com/unaiiM/UniPost#readme",
+  "dependencies": {
+    "@types/node": "^20.3.2"
+  }
+}
