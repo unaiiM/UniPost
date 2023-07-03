@@ -11,7 +11,7 @@ export interface RequestOptions {
 export default class Request {
 
     public constructor(
-        private options : RequestOptions;
+        private options : RequestOptions
     ){};
 
 };

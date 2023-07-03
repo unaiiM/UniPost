@@ -7,7 +7,7 @@ export interface TlsOptions {
 export default class Tls {
 
     public constructor(
-        private options : TlsOptions;
+        private options : TlsOptions
     ){};
 
 };
