@@ -3,12 +3,14 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "outDir": "build"
+        "outDir": "build",
+        "baseUrl": "build"
     },
     "include": [
         "core/**/*",
         "lib/**/*",
         "api/**/*",
+        "trys/**/*",
         "./*"
     ]
 }

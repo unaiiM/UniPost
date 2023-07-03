@@ -2,17 +2,30 @@ import * as fs from 'fs';
 
 export interface InitConfig {
     BASE_PATH : string;
-    BUILD_PATH : string;
+    IMPORT_PATH : string;
     CONFIG_FILE : string;
+    API_LISTEN_PORT : boolean;
+    API_PORT : number;
+    API_PATH : string;
+    API_HOST : string;
+    WEB_PORT : number;
+    WEB_HOST : string;
+    ONLY_API : boolean;
 };
-
-export default class Config implements InitConfig {
+class Config implements InitConfig {
 
     public BASE_PATH : string = process.cwd();
-    public UILD_PATH : string = this.BASE_PATH + "/build";
-    public CONFIG_FILE: string = this.BASE_PATH + "/assets/json/config.json";
+    public IMPORT_PATH : string = this.BASE_PATH + "/build";
+    public CONFIG_FILE : string = this.BASE_PATH + "/assets/json/config.json";
+    public API_LISTEN_PORT: boolean = false;
+    public API_PATH: string = "/api";
+    public API_PORT: number = 8080;
+    public API_HOST: string = "0.0.0.0";
+    public WEB_PORT: number = 80;
+    public WEB_HOST: string = "0.0.0.0";
+    public ONLY_API: boolean = false;
 
-    public constructor(cfg? : Partial<InitConfig>){
+    public constructor(cfg : Partial<InitConfig> = {}){
         Object.assign(this, cfg);
     };
 
@@ -26,3 +39,7 @@ export default class Config implements InitConfig {
     };
 
 };
+
+const config : Config = new Config();
+process.env.CONFIG_PATH = config.BASE_PATH + "/lib/config.js";
+export default config;

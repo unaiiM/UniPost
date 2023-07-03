@@ -4,7 +4,8 @@
   "description": "Advanced HTTP/HTTPS request UI Tool",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && tsc-alias",
+    "start": "node build/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/unaiiM/UniPost#readme",
   "dependencies": {
-    "@types/node": "^20.3.2"
+    "@types/node": "^20.3.2",
+    "tsc-alias": "^1.8.6"
   }
 }
