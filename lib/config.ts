@@ -41,5 +41,4 @@ class Config implements InitConfig {
 };
 
 const config : Config = new Config();
-process.env.CONFIG_PATH = config.BASE_PATH + "/lib/config.js";
 export default config;

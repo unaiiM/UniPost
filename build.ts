@@ -1,1 +1,0 @@
-import Config from "./lib/config";
