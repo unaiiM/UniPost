@@ -22,7 +22,7 @@ export default class HttpRequest {
     };
 
     public constructor(
-        options : HttpRequestOptions
+        options : HttpRequestOptions = {}
     ){
         Object.assign(this.options, options);
     };
