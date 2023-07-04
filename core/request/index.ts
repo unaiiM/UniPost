@@ -1,10 +1,13 @@
 import Tls, { TlsOptions } from "../tls";
-import Http, { HttpOptions } from "../http";
+import Http, { 
+        RequestOptions as HttpRequestOptions, 
+        ResponseStruct as HttpResponseStruct 
+} from "../http";
 
 export interface RequestOptions {
     host : string;
     port : number;
-    http : HttpOptions;
+    http : HttpRequestOptions;
     tls : TlsOptions;
 };
 
