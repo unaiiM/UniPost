@@ -1,9 +1,5 @@
 import Tls, { TlsClientOptions as TCO } from "../tls";
-import { 
-        default as Http,
-        RequestOptions as HttpRequestOptions, 
-        ResponseStruct as HttpResponseStruct 
-} from "../http";
+import { Http } from "../http";
 import * as net from "net";
 
 export interface TlsClientOptions extends TCO {
@@ -13,7 +9,7 @@ export interface TlsClientOptions extends TCO {
 export interface RequestOptions {
     host : string;
     port : number;
-    http? : HttpRequestOptions;
+    http? : Http.RequestOptions;
     tls? : TlsClientOptions;
 };
 
@@ -27,7 +23,7 @@ export default class Request {
 
     private socket : net.Socket = new net.Socket();
     private tls : Tls;
-    private http : HttpRequest;
+    private http : Http.RequestInstance = new Http.request();
 
     public constructor(
         private options : RequestOptions

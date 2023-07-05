@@ -1,9 +1,6 @@
 import HttpRequest, { HttpRequestOptions } from "./request";
 import HttpResponse, { HttpResponseStruct } from "./response";
 
-export type RequestOptions = HttpRequestOptions;
-export type ResponseStruct = HttpResponseStruct;
-
 export type HttpVersion = 0.9 | 
     1.0 | 
     1.1 | 
@@ -19,14 +16,11 @@ export type HttpMethods = "GET" |
     "TRACE" |
     "CONNECT";
 
-export interface Http {
-    request : typeof HttpRequest;
-    response : typeof HttpResponse;
+export namespace Http {
+    export type RequestOptions = HttpRequestOptions;
+    export type ResponseStruct = HttpResponseStruct;
+    export type RequestInstance = HttpRequest;
+    export type ResponseInstance = HttpResponse;
+    export const request: typeof HttpRequest = HttpRequest;
+    export const response: typeof HttpResponse = HttpResponse
 };
-
-const http : Http = {
-    request: HttpRequest,
-    response: HttpResponse
-};
-
-export default http;
