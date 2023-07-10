@@ -1,5 +1,4 @@
-import Request from "./request";
-
-export default {
-    Request,
+import * as Request from "./request";
+export {
+    Request
 };

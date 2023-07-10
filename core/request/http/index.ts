@@ -1,7 +1,7 @@
 import HttpRequest, { HttpRequestOptions } from "./request";
 import HttpResponse, { HttpResponseStruct } from "./response";
 
-export class Http {
+class Http {
     public request: HttpRequest;
     public response: HttpResponse;
 
@@ -14,7 +14,7 @@ export class Http {
     };
 };
 
-export declare namespace Http {
+declare namespace Http {
     type RequestOptions = HttpRequestOptions;
     type ResponseStruct = HttpResponseStruct;
     type Methods = "GET" | 
@@ -31,3 +31,5 @@ export declare namespace Http {
     1.1 | 
     2.0;
 };
+
+export default Http;

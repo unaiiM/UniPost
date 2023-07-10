@@ -1,5 +1,5 @@
 import Tls, { TlsClientOptions as TCO } from "./tls";
-import { Http } from "./http";
+import Http from "./http";
 import * as net from "net";
 
 interface __Listeners {
@@ -8,16 +8,29 @@ interface __Listeners {
     onClose : () => void;
 };
 
-class Request {
+interface TlsClientOptions extends TCO {
+    disabled : boolean;
+}
+
+export interface RequestOptions {
+    host : string;
+    port : number;
+    http? : Http.RequestOptions;
+    tls? : TlsClientOptions;
+}
+
+export type Listeners = Partial<__Listeners>;
+
+export class Request {
 
     private socket : net.Socket = new net.Socket();
     private tls : Tls;
     private http : Http = new Http();
-    private listeners : Request.Listeners = {}; 
+    private listeners : Listeners = {}; 
 
     public constructor(
-        private options : Request.RequestOptions,
-        listeners? : Request.Listeners
+        private options : RequestOptions,
+        listeners? : Listeners
     ){
         this.listeners = listeners;
     };
@@ -58,20 +71,6 @@ class Request {
 
 };
 
-
-declare namespace Request {
-    interface TlsClientOptions extends TCO {
-        disabled : boolean;
-    }
-    
-    interface RequestOptions {
-        host : string;
-        port : number;
-        http? : Http.RequestOptions;
-        tls? : TlsClientOptions;
-    }
-    
-    type Listeners = Partial<__Listeners>;
+export {
+    Http
 };
-
-export default Request;
