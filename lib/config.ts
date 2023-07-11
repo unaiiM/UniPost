@@ -8,9 +8,15 @@ export interface InitConfig {
     API_PORT : number;
     API_PATH : string;
     API_HOST : string;
+    WEB_PATH : string;
     WEB_PORT : number;
     WEB_HOST : string;
     ONLY_API : boolean;
+    WS_HOST : string;
+    WS_PORT : number;
+    MAX_HISTORY_SCREENS : number;
+    MAX_PROJECTS : number;
+    MAX_SCREENS : number;
 };
 class Config implements InitConfig {
 
@@ -21,9 +27,12 @@ class Config implements InitConfig {
     public API_PATH: string = "/api";
     public API_PORT: number = 8080;
     public API_HOST: string = "0.0.0.0";
+    public WEB_PATH: string = this.BASE_PATH + "/app/dist/app";
     public WEB_PORT: number = 80;
     public WEB_HOST: string = "0.0.0.0";
     public ONLY_API: boolean = false;
+    public WS_HOST: string = "0.0.0.0";
+    public WS_PORT: number = 4444;
 
     public constructor(cfg : Partial<InitConfig> = {}){
         Object.assign(this, cfg);
@@ -41,4 +50,4 @@ class Config implements InitConfig {
 };
 
 const config : Config = new Config();
-export default config;
+export default <Config> config;

@@ -1,9 +1,8 @@
 import { default as api } from "./api";
-import * as express from "express";
-import { Express } from "express";
+import { default as web } from "./app";
 import Init from "./lib/init";
+import WebSocket from "./wss";
 
-const app : Express = express();
-
-const init : Init = new Init(app, api);
+const ws : WebSocket = new WebSocket();
+const init : Init = new Init(web, api, ws);
 init.load();

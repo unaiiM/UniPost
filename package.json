@@ -2,9 +2,9 @@
   "name": "unipost",
   "version": "1.0.0",
   "description": "Advanced HTTP/HTTPS request UI Tool",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "scripts": {
-    "build": "tsc && tsc-alias",
+    "build": "npm-run-all clean tsc",
     "start": "node build/index.js"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "@types/ws": "^8.5.5",
     "express": "^4.18.2",
     "tsc-alias": "^1.8.6",
+    "typescript": "^5.1.6",
     "ws": "^8.13.0"
   }
 }

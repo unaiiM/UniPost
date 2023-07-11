@@ -1,0 +1,21 @@
+.main {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-areas:
+    'menu request'
+    'menu response';
+    grid-template-columns: 30% 70%;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.request {
+    grid-area: request;
+}
+
+.response {
+    grid-area: response;
+}

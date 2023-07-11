@@ -22,9 +22,10 @@ export default class Client {
 
     private handleRequest(options : Core.Request.RequestOptions) : void {
         const listeners : Core.Request.Listeners = {
-            onResponse : this.onRequestResponse.bind(this)
+            onResponse : this.onRequestResponse.bind(this),
+            onError : this.onRequestError.bind(this)
         };
-        const req : Core.Request.Request = new Core.Request.Request(options);
+        const req : Core.Request.Request = new Core.Request.Request(options, listeners);
         req.connect();
     };
 
