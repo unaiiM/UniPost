@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Screen } from 'src/app/types/screens';
+import { Screen } from '@shared/types/index';
 
 @Component({
   selector: 'app-screens',

@@ -1,5 +1,5 @@
 import * as ws from "ws";
-import * as Core from "../../core";
+import * as Core from "@core";
 
 export default class Client {
 

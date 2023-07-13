@@ -1,6 +1,6 @@
-import config from "./config.js";
+import config from "@lib/config";
 import { Express } from "express";
-import WebSocket from "../wss";
+import WebSocket from "@wss";
 
 export default class Init {
 
@@ -30,7 +30,7 @@ export default class Init {
                 console.log("API server sucessfully started at " + config.API_HOST + ":" + config.API_PORT);
             });
         } else 
-            this.web.use(config.API_PATH, this.api);
+            this.web.use(config.API_URL_PATH, this.api);
             console.log("API sucessfully vinculed with web server!");
     };
 

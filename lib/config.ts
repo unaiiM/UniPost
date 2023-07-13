@@ -6,7 +6,7 @@ export interface InitConfig {
     CONFIG_FILE : string;
     API_LISTEN_PORT : boolean;
     API_PORT : number;
-    API_PATH : string;
+    API_URL_PATH : string;
     API_HOST : string;
     WEB_PATH : string;
     WEB_PORT : number;
@@ -17,6 +17,9 @@ export interface InitConfig {
     MAX_HISTORY_SCREENS : number;
     MAX_PROJECTS : number;
     MAX_SCREENS : number;
+    MYSQL_HOST : string;
+    MYSQL_PORT : number;
+    STORAGE_FILE : string;
 };
 class Config implements InitConfig {
 
@@ -24,7 +27,7 @@ class Config implements InitConfig {
     public IMPORT_PATH : string = this.BASE_PATH + "/build";
     public CONFIG_FILE : string = this.BASE_PATH + "/assets/json/config.json";
     public API_LISTEN_PORT: boolean = false;
-    public API_PATH: string = "/api";
+    public API_URL_PATH: string = "/api";
     public API_PORT: number = 8080;
     public API_HOST: string = "0.0.0.0";
     public WEB_PATH: string = this.BASE_PATH + "/app/dist/app";
@@ -33,6 +36,12 @@ class Config implements InitConfig {
     public ONLY_API: boolean = false;
     public WS_HOST: string = "0.0.0.0";
     public WS_PORT: number = 4444;
+    public MAX_HISTORY_SCREENS: number = 12;
+    public MAX_PROJECTS: number = 12;
+    public MAX_SCREENS: number = 32;
+    public MYSQL_HOST: string = "127.0.0.1";
+    public MYSQL_PORT: number = 3306;
+    public STORAGE_FILE: string = this.BASE_PATH + "/assets/json/storage.json";
 
     public constructor(cfg : Partial<InitConfig> = {}){
         Object.assign(this, cfg);

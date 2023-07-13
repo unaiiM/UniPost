@@ -1,0 +1,30 @@
+<div class="menu">
+    <div class="body">
+        <div class="windows">
+            <div class="window" [routerLink]="['/', 'screens']" 
+            [ngStyle]="{ 'box-shadow' : items[0].active ? '0 0 6px white' : '0 0 0 white' }"
+            (click)="handleClickItem(0)">
+                <img src="/assets/img/list.png">
+            </div>
+            <div class="window" [routerLink]="['/', 'screens']" 
+            [ngStyle]="{ 'box-shadow' : items[1].active ? '0 0 6px white' : '0 0 0 white' }"
+            (click)="handleClickItem(1)">
+                <img src="/assets/img/layers.png">
+            </div>
+            <div class="window" [routerLink]="['/', 'screens']" 
+            [ngStyle]="{ 'box-shadow' : items[2].active ? '0 0 6px white' : '0 0 0 white' }"
+            (click)="handleClickItem(2)">
+                <img src="/assets/img/history.png">
+            </div>
+            <div class="window window-final" [routerLink]="['/', 'screens']" 
+            [ngStyle]="{ 'box-shadow' : items[3].active ? '0 0 6px white' : '0 0 0 white' }"
+            (click)="handleClickItem(3)">
+                <img src="/assets/img/gear.png">
+            </div>
+        </div>
+        <div class="content">
+            <router-outlet></router-outlet>
+            <app-screens *ngIf="showDefault"></app-screens>
+        </div>
+    </div>
+</div>

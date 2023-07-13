@@ -3,7 +3,17 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "outDir": "build"
+        "outDir": "build",
+        "baseUrl": ".",
+        "paths": {
+            "@lib/*": ["lib/*"],
+            "@wss": ["wss"],
+            "@utils/*": ["lib/utils/*"],
+            "@core": ["core"],
+            "@api": ["api"],
+            "@web": ["web"],
+            "@shared/*": ["shared/*"]
+        }
     },
     "include": [
         "core/**/*",
@@ -12,8 +22,5 @@
         "trys/**/*",
         "app/*",
         "./*"
-    ],
-    "paths": {
-        "@lib/*" : ["./build/lib/*"]
-    }
+    ]
 }
