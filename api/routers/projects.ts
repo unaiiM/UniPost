@@ -1,8 +1,7 @@
 import * as express from "express";
-import Storage, { Screen, Screens } from "@lib/storage";
+import { storage, Screen, Screens } from "@lib/storage";
 import { ScreensHandler, getScreenFromRequest } from "../lib/screensHandler";
 
-const storage : Storage = new Storage();
 const router : express.Router = express.Router();
 
 router.use(express.urlencoded());

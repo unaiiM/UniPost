@@ -47,3 +47,5 @@ export {
     Screens,
     Screen
 };
+
+export const storage : Storage = new Storage();

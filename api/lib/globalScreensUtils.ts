@@ -1,5 +1,5 @@
-import { Screens, Screen } from "@lib/storage";
 import * as express from "express";
+import { Screen, Screens } from "@lib/storage";
 
 export function ScreensHandler(req : express.Request, res : express.Response, 
     screens : Screens, index? : number) : void {
@@ -68,4 +68,31 @@ export function getScreenFromRequest(req : express.Request) : Screen {
     };
 
     return screen;
+};
+
+export function initScreensRouter(router : express.Router, screens : Screens){
+    router.route("/")
+        .get((req : express.Request, res : express.Response) => {             
+            res.json(screens);
+        })
+        .post((req : express.Request, res : express.Response) => {
+            ScreensHandler(req, res, screens);
+        });
+
+    router.route("/:index")
+        .get((req : express.Request, res : express.Response) => {
+            const index : number = Number(req.params.index);
+                
+            if(screens.exists(index)){
+                const screen : Screen = screens.get(index);
+                
+                res.json(screen);
+            }else res.json({
+                error: "Screen not found!"
+            });
+        })
+        .post((req : express.Request, res : express.Response) => {
+            const index : number = Number(req.params.index);
+            ScreensHandler(req, res, screens,index);
+        });
 };

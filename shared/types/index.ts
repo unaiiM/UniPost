@@ -1,4 +1,5 @@
-export interface Screen {
-    id : number;
-    name : string;
-}
+import { Screen } from "@lib/storage";
+
+export {
+    Screen
+};
