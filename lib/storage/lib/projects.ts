@@ -10,6 +10,14 @@ export default class Projects {
         this.projects = projects;
     };
 
+    public all() : string[] {
+        return Object.keys(this.projects);
+    };
+
+    public get(name : string) : Screens {
+        return this.projects[name];
+    };
+
     public exists(name : string) : boolean {
         return !(!this.projects[name]);
     };
@@ -22,6 +30,13 @@ export default class Projects {
 
     public delete(name : string) : void {
         delete this.projects[name];
+    };
+
+    public modify(oldName : string, newName : string) : boolean {
+        if(this.exists(newName)) return false;
+        this.projects[newName] = this.projects[oldName];
+        delete this.projects[oldName];
+        return true;
     };
 
 };

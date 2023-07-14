@@ -23,3 +23,4 @@ Indicate the desired action to be performed on the identified resource.
     - Agent utility to get basic agents. 
     - Cookie utility to build sample cookie.
 - Add Http protocol validation, add method isValid and submethods for every struct section (line, headers, body) [-]
+- Add config (API, WEB,...) to avoid hardcoded strings.

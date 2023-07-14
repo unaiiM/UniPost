@@ -1,13 +1,7 @@
 import config from "@lib/config";
+import Screens, { Screen } from "./lib/screens";
+import Projects from "./lib/projects";
 import * as fs from "fs";
-
-export interface Screen {
-    name : string,
-    request : string;
-    response : string;
-};
-export type Screens = Screen[];
-export type Projects = Record<string, Screens>;
 
 interface FileStruct {
     screens : Screens;
@@ -18,9 +12,9 @@ interface FileStruct {
 export default class Storage implements FileStruct {
 
     private file : string;
-    public screens: Screens = [];
-    public projects: Projects = {};
-    public history: Screens = [];
+    public screens: Screens = new Screens();
+    public projects: Projects = new Projects();
+    public history: Screens = new Screens();
 
     public constructor(file : string = config.STORAGE_FILE){
         if(fs.existsSync(file)) this.file = file;
@@ -46,59 +40,10 @@ export default class Storage implements FileStruct {
         fs.writeFileSync(json, this.file);
     };
 
-    public addScreen(screen : Screen) : void {
-        this.screens.push(screen);
-    };
+};
 
-    public deleteScreen(index : number) : void {
-        this.screens.splice(index, 1);
-    };
-
-    public addHistory(screen : Screen) : void {
-        this.history.push(screen);
-    };
-
-    public popHistory() : void {
-        this.history.pop();
-    };
-
-    public addProjectScreen(name : string, screen : Screen) : void {
-        this.projects[name]?.push(screen);
-    };
-
-    public deleteProjectScreen(name : string, index : number) : void {
-        this.projects[name]?.splice(index, 1);
-    };
-
-    public modifyProjectScreen(name : string, index : number, screen : Screen) : void {
-        if(this.existsProject(name)) this.projects[name][index] = screen;
-    };
-
-    public createProject(name : string) : void {
-        if(!this.existsProject(name)) this.projects[name] = [];
-    };
-
-    public modifyProject(oldName : string, newName : string) : void {
-        if(this.existsProject(newName) && !this.existsProject(newName)){
-            this.projects[newName] = this.projects[oldName];
-            delete this.projects[oldName];
-        };
-    };
-
-    public existsProject(name : string) : boolean {
-        return !(!this.projects[name]);
-    };
-
-    public getProject(name : string) : Screens {
-        return this.projects[name];
-    };
-
-    public getProjects() : string[] {
-        return Object.keys(this.projects);
-    };
-
-    public deleteProject(name : string) : void {
-        delete this.projects[name];
-    };
-
+export {
+    Projects,
+    Screens,
+    Screen
 };
