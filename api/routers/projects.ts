@@ -12,9 +12,9 @@ router.route("/")
     })
     .post((req : express.Request, res : express.Response) => {
         const action : string = req.body.action;
-        const project : string = req.params.project;
+        const project : string = req.body.project;
         
-        if(project && storage.projects.exists(project)){
+        if(project && !storage.projects.exists(project)){
 
             if(action === 'create'){
                 storage.projects.create(project);
@@ -41,7 +41,7 @@ router.route("/:project")
             res.json(storage.projects.get(project));
         }else {
             res.json({
-                error: "Project not found!"
+                error: "Project is undefined or alredy exists!"
             });
         };
     })
@@ -71,7 +71,7 @@ router.route("/:project")
             };
         
         } else res.json({
-            error: "Project alredy exists!"
+            error: "Project is undefined or alredy exists!"
         });
 
     });
