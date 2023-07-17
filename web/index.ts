@@ -1,5 +1,5 @@
 import config from "../lib/config";
-import * as express from "express";
+import express from "express";
 
 const app : express.Express = express();
 

@@ -1,4 +1,4 @@
-import Screens, { Screen } from "./screens";
+import Screens from "./screens";
 
 export type PorjectsObject = Record<string, Screens>;
 
@@ -10,8 +10,16 @@ export default class Projects {
         this.projects = projects;
     };
 
-    public all() : string[] {
+    public all() : PorjectsObject {
+        return this.projects;
+    };
+
+    public names() : string[] {
         return Object.keys(this.projects);
+    };
+
+    public join(projects : PorjectsObject) : void {
+        Object.assign(this.projects, projects);
     };
 
     public get(name : string) : Screens {

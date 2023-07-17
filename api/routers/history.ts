@@ -1,8 +1,8 @@
-import * as express from "express";
+import express from "express";
 import { storage } from "@lib/storage";
-import { initScreensRouter } from "api/lib/globalScreensUtils";
+import { ScreensRouter } from "api/lib/globalScreensUtils";
 
 const router : express.Router = express.Router();
-initScreensRouter(router, storage.history);
+ScreensRouter(router, storage.history);
 
 export default router;

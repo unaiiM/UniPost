@@ -3,6 +3,7 @@
     height: 100%;
     padding: 0 4% 0 4%;
     background-color: #FF8E76;
+    box-shadow: 0.1vw 0 10px #FF8E76;
 }
 
 .body {
@@ -38,8 +39,12 @@
     cursor: pointer;
 }
 
+.window-active {
+    box-shadow: 0 0 6px white;
+}
+
 .window:hover {
-    box-shadow: 0 0 5px white;
+    background-color: #DFDFDF;
 }
 
 .window-final {

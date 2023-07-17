@@ -25,5 +25,7 @@ Indicate the desired action to be performed on the identified resource.
     - Agent utility to get basic agents. 
     - Cookie utility to build sample cookie.
 - Add Http protocol validation, add method isValid and submethods for every struct section (line, headers, body) [-]
-- Add config (API, WEB,...) to avoid hardcoded strings.
+- Add config (API, WEB,...) to avoid hardcoded strings. [-]
 - Maybe add a class in API and WEB and WSS to make it more clear. [-]
+- Maybe divide BASE_PATH from InitConfig interface and passed as parameter in Config class contructor. [-]
+- Add config API, WEB, APP interface for metadata (current version, and other data related to the program). [-]

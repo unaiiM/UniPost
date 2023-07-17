@@ -1,6 +1,6 @@
-import * as express from "express";
+import express from "express";
 import { storage, Screen, Screens } from "@lib/storage";
-import { ScreensHandler, getScreenFromRequest } from "../lib/screensHandler";
+import { ScreensHandler } from "../lib/globalScreensUtils";
 
 const router : express.Router = express.Router();
 
@@ -8,7 +8,29 @@ router.use(express.urlencoded());
 
 router.route("/")
     .get((req : express.Request, res : express.Response) => {
-        res.json(storage.projects.all());
+        res.json(storage.projects.names());
+    })
+    .post((req : express.Request, res : express.Response) => {
+        const action : string = req.body.action;
+        const project : string = req.params.project;
+        
+        if(project && storage.projects.exists(project)){
+
+            if(action === 'create'){
+                storage.projects.create(project);
+
+                res.json({
+                    message: "Project created sucessfully!"
+                });
+            }else {
+                res.json({
+                    error: "Action not found!"
+                }); 
+            };
+        
+        } else res.json({
+            error: "Project alredy exists!"
+        });
     });
 
 router.route("/:project")
@@ -29,13 +51,7 @@ router.route("/:project")
         
         if(project && storage.projects.exists(project)){
 
-            if(action === 'create'){
-                storage.projects.create(project);
-
-                res.json({
-                    message: "Project created sucessfully!"
-                });
-            }else if(action === 'modify'){
+            if(action === 'modify'){
                 const name : string = req.body.name;
                 storage.projects.modify(project, name);
                 

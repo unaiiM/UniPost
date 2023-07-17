@@ -1,15 +1,15 @@
 import config from "@lib/config";
 import Screens, { Screen } from "./lib/screens";
-import Projects from "./lib/projects";
+import Projects, { PorjectsObject } from "./lib/projects";
 import * as fs from "fs";
 
 interface FileStruct {
-    screens : Screens;
-    projects : Projects;
-    history : Screens;
+    screens : Screen[];
+    projects : PorjectsObject;
+    history : Screen[];
 };
 
-export default class Storage implements FileStruct {
+export default class Storage {
 
     private file : string;
     public screens: Screens = new Screens();
@@ -18,22 +18,24 @@ export default class Storage implements FileStruct {
 
     public constructor(file : string = config.STORAGE_FILE){
         if(fs.existsSync(file)) this.file = file;
+        else throw new Error("File doesn't exists!");
+        this.load();
     };
 
     public load() : void {
         const json : string = fs.readFileSync(this.file).toString();
         const obj : FileStruct = JSON.parse(json);
 
-        if(obj.screens) this.screens = obj.screens;
-        if(obj.projects) this.projects = obj.projects;
-        if(obj.history) this.history = obj.history;
+        if(obj.screens) this.screens.join(obj.screens);
+        if(obj.projects) this.projects.join(obj.projects);
+        if(obj.history) this.history.join(obj.history);
     };
 
     public save() : void {
         const obj : FileStruct = {
-            screens: this.screens,
-            projects: this.projects,
-            history: this.history
+            screens: this.screens.all(),
+            projects: this.projects.all(),
+            history: this.history.all()
         };
         const json : string = JSON.stringify(obj);
 

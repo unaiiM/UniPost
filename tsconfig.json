@@ -4,15 +4,18 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "outDir": "build",
-        "baseUrl": ".",
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
         "paths": {
-            "@lib/*": ["lib/*"],
-            "@wss": ["wss"],
-            "@utils/*": ["lib/utils/*"],
-            "@core": ["core"],
-            "@api": ["api"],
-            "@web": ["web"],
-            "@shared/*": ["shared/*"]
+            "@lib/*": ["./lib/*"],
+            "@wss": ["./wss"],
+            "@utils/*": ["./lib/utils/*"],
+            "@core": ["./core"],
+            "@api": ["./api"],
+            "@web": ["./web"],
+            "@shared/*": ["./shared/*"],
+            "@json/*": ["./assets/json/*"]
         }
     },
     "include": [
@@ -22,6 +25,8 @@
         "trys/**/*",
         "app/*",
         "shared/**/*",
-        "./*"
+        "./*",
+        "assets/json/*.json",
+        "tests/*"
     ]
 }

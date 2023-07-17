@@ -1,8 +1,6 @@
-export interface Screen {
-    name : string,
-    request : string;
-    response : string;
-};
+import { Screen } from "@shared/types/storage";
+
+interface ScreensNames {}
 
 export default class Screens {
     
@@ -17,6 +15,16 @@ export default class Screens {
         return index >= 0 && index < this.length;
     };
 
+    public all() : Screen[] {
+        return this.screens;
+    };
+
+    public names() : string[] {
+        let names : string[] = [];
+        this.screens.forEach((screen : Screen) => names.push(screen.name));
+        return names;
+    };
+
     public get(index : number) : Screen {
         return this.screens[index];
     };
@@ -26,10 +34,15 @@ export default class Screens {
         this.length++;
     };
 
+    public join(screens : Screen[]) : void {
+        this.screens = this.screens.concat(screens);
+    };
+
     public delete(index : number) : boolean {
         if(!this.exists(index)) return false;
         this.screens.splice(index, 1);
         this.length--;
+        return true;
     };
 
     public modify(index : number, screen : Screen) : boolean {
@@ -50,4 +63,8 @@ export default class Screens {
         this.length = 0;
     };
 
+};
+
+export {
+    Screen
 };

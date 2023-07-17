@@ -70,10 +70,10 @@ export function getScreenFromRequest(req : express.Request) : Screen {
     return screen;
 };
 
-export function initScreensRouter(router : express.Router, screens : Screens){
+export function ScreensRouter(router : express.Router, screens : Screens){
     router.route("/")
         .get((req : express.Request, res : express.Response) => {             
-            res.json(screens);
+            res.json(screens.names());
         })
         .post((req : express.Request, res : express.Response) => {
             ScreensHandler(req, res, screens);
