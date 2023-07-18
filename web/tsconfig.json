@@ -26,7 +26,9 @@
     ],
     "paths": {
       "@workspace/*": ["./src/app/*"],
-      "@shared/*": ["../shared/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@global/shared/*": ["../shared/*"],
+      "@ctypes/*": ["./src/app/types/*"],
       "@lib/*": ["../lib/*"]
     }
   },

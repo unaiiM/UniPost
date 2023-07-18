@@ -1,7 +1,30 @@
 <div class="screens" *ngIf="!isLoading">
     <!-- ngFor here, loop screens, if no name by default is "New window" -->
-    <div class="screen">
-        <div class="title">hello</div>
+    <div class="screen" *ngFor="let screen of screens" [ngClass]="{ 'screen-show': screen.show }">
+        <div class="visible">
+            <div class="name">
+                <input type="text" name="name" [value]="screen.name" [readOnly]="!screen.show"/>
+            </div>
+            <div class="arrow" (click)="handleArrowClick(screen)">
+                <img src="/assets/img/down-arrow.png" alt="Show" *ngIf="!screen.show">
+                <img src="/assets/img/up-arrow.png" alt="Hide" *ngIf="screen.show">
+            </div>
+        </div>
+        <select name="project" class="projects">
+            <option value="" disabled selected hidden>Select a project</option>
+            <option *ngFor="let project of projects" [value]="project">{{ project }}</option>
+        </select>
+        <div class="description">
+            <textarea name="description"></textarea>
+        </div>
+        <div class="buttons">
+            <div class="button delete">
+                <img src="/assets/img/trash.png" alt="Delete">
+            </div>
+            <div class="button save">
+                <img src="/assets/img/check.png" alt="Save">
+            </div>
+        </div>
     </div>
 </div>
 
