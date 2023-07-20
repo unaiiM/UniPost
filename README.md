@@ -29,4 +29,10 @@ Indicate the desired action to be performed on the identified resource.
 - Maybe add a class in API and WEB and WSS to make it more clear. [-]
 - Maybe divide BASE_PATH from InitConfig interface and passed as parameter in Config class contructor. [-]
 - Add config API, WEB, APP interface for metadata (current version, and other data related to the program). [-]
-- Add proxy configuration (Socks, Http) [-]
+- Add proxy configuration (Socks, Http) [-] 
+
+# Pending last
+- We worked with frontend style and funcionalities but we stayed modifing the api that involves mostly the storage library.
+That means need to modify and add code from storage and api the same structure with the aplied in the frontend funcionalities.
+- The problems that I have is making partial the screen, that means the user can send to the api only the name and the storage
+will only modify the name. Another problem is deleting extra propreties that the user can send and we don't want.

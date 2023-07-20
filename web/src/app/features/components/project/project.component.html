@@ -1,0 +1,11 @@
+<div class="project">
+    <div class="info">
+        <div class="name">
+            <p>{{ project }}</p>
+        </div>
+        <div class="close" routerLink="/projects">
+            <img src="/assets/img/close.png" alt="Close">
+        </div>
+    </div>
+    <app-screens class="screens" [type]="type" [project]="project"></app-screens>
+</div>

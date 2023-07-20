@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ScreensComponent } from '../screens/screens.component';
 
 interface Item {
   active: boolean;
@@ -11,7 +12,6 @@ interface Item {
 })
 export class MenuComponent {
 
-  public showDefault : boolean = true;
   public items : Item[] = [{
     active: true,
   }, {
@@ -24,9 +24,7 @@ export class MenuComponent {
 
   public constructor(){};
 
-  public handleClickItem(index : number){
-    if(this.showDefault) this.showDefault = false;
-    
+  public handleClickItem(index : number){    
     for(let i : number = 0; i < this.items.length; i++){
       const item : Item = this.items[i];
       if(i === index) item.active = true;

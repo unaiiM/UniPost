@@ -1,11 +1,10 @@
-.screen {
+.project {
     margin-top: 3%;
     display: grid;
     row-gap: 0.5vw;
     grid-template-areas: 'visible'
-        'projects'
         'description';
-    grid-template-rows: min-content min-content min-content;
+    grid-template-rows: min-content min-content;
     width: calc(100% - 1vw);  
     padding: 0.5vw; 
     background-color: #FF8E76;
@@ -16,20 +15,20 @@
     overflow: hidden;
 }
 
-.screen-show {
-    height: 14vw;
+.project-show {
+    height: 12vw;
     cursor: context-menu;
 }
 
-.screen-hide:hover {
+.project-hide:hover {
     box-shadow: 0 0 10px #FF8E76;
 }
 
-.screen-hide .visible .name input {
+.project-hide .visible .name input {
     cursor: pointer;
 }
 
-.screen .visible {
+.project .visible {
     grid-area: visible;
     display: flex;
     grid-template-columns: 80% 10%;
@@ -39,12 +38,12 @@
     height: 2vw;
 }
 
-.screen .visible .name {
+.project .visible .name {
     height: 100%;
     width: 80%;
 }
 
-.screen .visible .name input {
+.project .visible .name input {
     width: 90%;
     padding: 0 5% 0 5%;
     height: 100%;
@@ -56,7 +55,7 @@
     border-radius: 4px;
 }
 
-.screen .visible .arrow {
+.project .visible .arrow {
     align-self: right;
     display: flex;
     width: 10%;
@@ -68,33 +67,12 @@
     user-select: none;
 }
 
-.screen .visible .arrow img {
+.project .visible .arrow img {
     width: 40%;
     padding: 20% 0 20% 0;
 }
 
-.screen .projects {
-    grid-area: projects;
-    width: 100%;
-    padding: 0 5% 0 5%;
-    height: 2vw;
-    outline: none;
-    border: none;
-    font-size: 0.9vw;
-    font-family: arial;
-    background-color: white;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-
-    /* Arrow */
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.7rem top 50%;
-    background-size: 0.65rem auto;
-}
-
-.screen .description {
+.project .description {
     grid-area: description;
     width: 100%;
     height: 6vw;
@@ -102,7 +80,7 @@
     border-radius: 4px;
 }
 
-.screen .description textarea {
+.project .description textarea {
     width: 90%;
     height: 80%;
     position: relative;
@@ -117,20 +95,20 @@
     cursor: auto;
 }
 
-.screen .description textarea::-webkit-scrollbar {
+.project .description textarea::-webkit-scrollbar {
     width: 0.3vw;
 }
   
-.screen .description textarea::-webkit-scrollbar-track {
+.project .description textarea::-webkit-scrollbar-track {
     background-color: transparent; 
 }
    
-.screen .description textarea::-webkit-scrollbar-thumb {
+.project .description textarea::-webkit-scrollbar-thumb {
     background-color: #555; 
     border-radius: 20px;
 }
   
-.screen .description textarea::-webkit-scrollbar-thumb:hover {
+.project .description textarea::-webkit-scrollbar-thumb:hover {
     background-color: #BCBCBC; 
 }
 

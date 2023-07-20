@@ -48,6 +48,7 @@ class Config implements InitConfig {
     public constructor(cfg : Partial<InitConfig> = {}){
         if(!cfg.BASE_PATH) cfg.BASE_PATH = process.cwd();
         else this.BASE_PATH = cfg.BASE_PATH;
+        
         this.setDefaultValues();
         this.joinBasePath(cfg);
         Object.assign(this, cfg);

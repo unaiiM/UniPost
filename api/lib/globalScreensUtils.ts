@@ -21,8 +21,8 @@ export function ScreensHandler(req : express.Request, res : express.Response,
                     message: "All screens has been deleted sucessfully!"
                 });
             }else if(action === 'add'){
-                const screen : Screen = getScreenFromRequest(req); 
-                screens.add(screen);
+                const screen : Partial<Screen> | undefined = getScreenFromRequest(req); 
+                screens.add(<Screen> screen);
 
                 res.json({
                     message: "Screen added sucessfully!"
@@ -42,7 +42,7 @@ export function ScreensHandler(req : express.Request, res : express.Response,
                     message: "Screen deleted sucessfully!"
                 });
             }else if(action === 'modify'){
-                const screen : Screen = getScreenFromRequest(req);
+                const screen : Partial<Screen> = getScreenFromRequest(req);
                 screens.modify(index, screen);
 
                 res.json({
@@ -60,20 +60,17 @@ export function ScreensHandler(req : express.Request, res : express.Response,
 
 };
 
-export function getScreenFromRequest(req : express.Request) : Screen {
-    const screen : Screen = {
-        name: req.body.name,
-        request: req.body.request,
-        response: req.body.response
-    };
-
-    return screen;
+export function getScreenFromRequest(req : express.Request) : Partial<Screen> | undefined {
+    // What will happend if just add only --> return <Partial<Screen>> req.body.screen;
+    // error while casting undefined to partial interface.
+    if(req.body.screen) return <Partial<Screen>> req.body.screen;
+    else return undefined;
 };
 
 export function ScreensRouter(router : express.Router, screens : Screens){
     router.route("/")
         .get((req : express.Request, res : express.Response) => {             
-            res.json(screens.names());
+            res.json(screens.getAllInfo());
         })
         .post((req : express.Request, res : express.Response) => {
             ScreensHandler(req, res, screens);

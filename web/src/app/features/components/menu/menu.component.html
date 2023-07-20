@@ -1,23 +1,23 @@
 <div class="menu">
     <div class="body">
         <div class="windows">
-            <div class="window" [routerLink]="['/']" 
-            [ngClass]="{ 'window-active' : items[0].active }"
+            <div class="window" [routerLink]="['/screens']" 
+            routerLinkActive="window-active"
             (click)="handleClickItem(0)">
                 <img src="/assets/img/list.png">
             </div>
-            <div class="window" [routerLink]="['/', 'projects']" 
-            [ngClass]="{ 'window-active' : items[1].active }"
+            <div class="window" [routerLink]="['/projects']" 
+            routerLinkActive="window-active"
             (click)="handleClickItem(1)">
                 <img src="/assets/img/layers.png">
             </div>
-            <div class="window" [routerLink]="['/', 'history']" 
-            [ngClass]="{ 'window-active' : items[2].active }"
+            <div class="window" [routerLink]="['/history']" 
+            routerLinkActive="window-active"
             (click)="handleClickItem(2)">
                 <img src="/assets/img/history.png">
             </div>
-            <div class="window window-final" [routerLink]="['/', 'config']" 
-            [ngClass]="{ 'window-active' : items[3].active }"
+            <div class="window window-final" [routerLink]="['/config']" 
+            routerLinkActive="window-active"
             (click)="handleClickItem(3)">
                 <img src="/assets/img/gear.png">
             </div>

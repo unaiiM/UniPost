@@ -1,30 +1,38 @@
 <div class="screens" *ngIf="!isLoading">
     <!-- ngFor here, loop screens, if no name by default is "New window" -->
-    <div class="screen" *ngFor="let screen of screens" [ngClass]="{ 'screen-show': screen.show }">
+    <div class="screen" *ngFor="let screen of screens; let i = index" 
+    [ngClass]="{ 'screen-show': screen.show, 'screen-hide': !screen.show }"
+    (click)="handleScreenClick(screen)">
         <div class="visible">
             <div class="name">
-                <input type="text" name="name" [value]="screen.name" [readOnly]="!screen.show"/>
+                <input type="text" name="name" [(ngModel)]="screen.form.name" [readOnly]="!screen.show"/>
             </div>
             <div class="arrow" (click)="handleArrowClick(screen)">
                 <img src="/assets/img/down-arrow.png" alt="Show" *ngIf="!screen.show">
                 <img src="/assets/img/up-arrow.png" alt="Hide" *ngIf="screen.show">
             </div>
         </div>
-        <select name="project" class="projects">
+        <select name="project" class="projects" [(ngModel)]="screen.form.project">
             <option value="" disabled selected hidden>Select a project</option>
             <option *ngFor="let project of projects" [value]="project">{{ project }}</option>
         </select>
         <div class="description">
-            <textarea name="description"></textarea>
+            <textarea name="description" placeholder="Description text" [(ngModel)]="screen.form.description"></textarea>
         </div>
         <div class="buttons">
-            <div class="button delete">
-                <img src="/assets/img/trash.png" alt="Delete">
+            <div class="button delete" (click)="handleDelete(i)">
+                <img src="/assets/img/trash.png" alt="Delete"/>
             </div>
-            <div class="button save">
-                <img src="/assets/img/check.png" alt="Save">
+            <div class="button save" (click)="handleSave(screen)">
+                <img src="/assets/img/check.png" alt="Save"/>
+            </div>
+            <div class="button open" [routerLink]="path + '/' + i.toString()">
+                <img src="/assets/img/forward.png" alt="Open">
             </div>
         </div>
+    </div>
+    <div class="create" (click)="handleCreate()">
+        <img src="/assets/img/create.png" alt="New">
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-import { Screen } from "@shared/types/storage";
+import { Screen, ScreenInfo } from "@shared/types/storage";
 
 interface ScreensNames {}
 
@@ -6,16 +6,34 @@ export default class Screens {
     
     private screens : Screen[] = [];
     public length : number = 0;
+    public default : Screen = {
+        name: 'New window',
+        project: '',
+        description: '',
+        request: '',
+        response: ''
+    };
     
     constructor(screens : Screen[] = []){
         this.screens = this.screens.concat(screens);
+    };
+
+    public check(screen : Screen) : Screen {
+        const checked : Screen = {
+            name: screen.name,
+            project: screen.project,
+            description: screen.description,
+            request: screen.request,
+            response: screen.response
+        };
+        return checked;
     };
 
     public exists(index : number) : boolean {
         return index >= 0 && index < this.length;
     };
 
-    public all() : Screen[] {
+    public getAll() : Screen[] {
         return this.screens;
     };
 
@@ -29,9 +47,25 @@ export default class Screens {
         return this.screens[index];
     };
 
-    public add(screen : Screen) : void {
-        this.screens.push(screen);
-        this.length++;
+    public getAllInfo() : ScreenInfo[] {
+        return this.screens.map((screen : Screen) => this.parseToInfo(screen));
+    };
+
+    public parseToInfo(screen : Screen) : ScreenInfo {
+        const info : ScreenInfo = {
+            name: screen.name,
+            project: screen.project,
+            description: screen.description
+        };
+        return info;
+    };
+
+    public add(screen? : Screen) : void {
+        if(screen){
+            const refilledScreen : Screen = Object.assign(this.check(screen), this.default);
+            this.screens.push(refilledScreen);
+            this.length++;
+        }else this.screens.push(Object.assign({}, this.default));
     };
 
     public join(screens : Screen[]) : void {
@@ -45,9 +79,15 @@ export default class Screens {
         return true;
     };
 
-    public modify(index : number, screen : Screen) : boolean {
+    public modify(index : number, screen : Partial<Screen>) : boolean {
         if(!this.exists(index)) return false;
-        this.screens[index] = screen;
+        const obj : Screen = this.screens[index];
+        if(screen.name) obj.name = screen.name;
+        if(screen.project) obj.name = screen.project;
+        if(screen.description) obj.description = screen.description;
+        if(screen.request) obj.request = screen.request;
+        if(screen.response) obj.response = screen.response;
+
         return true;
     };
 

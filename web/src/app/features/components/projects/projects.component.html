@@ -1,0 +1,36 @@
+<div class="projects" *ngIf="!isLoading">
+    <!-- ngFor here, loop projects, if no name by default is "New project" -->
+    <div class="project" *ngFor="let project of projects; let i = index" 
+    [ngClass]="{ 'project-show': project.show, 'project-hide': !project.show }"
+    (click)="handleProjectClick(project)">
+        <div class="visible">
+            <div class="name">
+                <input type="text" name="name" [(ngModel)]="project.form.name" [readOnly]="!project.show"/>
+            </div>
+            <div class="arrow" (click)="handleArrowClick(project)">
+                <img src="/assets/img/down-arrow.png" alt="Show" *ngIf="!project.show">
+                <img src="/assets/img/up-arrow.png" alt="Hide" *ngIf="project.show">
+            </div>
+        </div>
+        <div class="description">
+            <textarea name="description" placeholder="Description text" 
+            [(ngModel)]="project.form.description"></textarea>
+        </div>
+        <div class="buttons">
+            <div class="button delete" (click)="handleDelete(i)">
+                <img src="/assets/img/trash.png" alt="Delete"/>
+            </div>
+            <div class="button save" (click)="handleSave(project)">
+                <img src="/assets/img/check.png" alt="Save"/>
+            </div>
+            <div class="button open" [routerLink]="'project/' + project.name">
+                <img src="/assets/img/forward.png" alt="Open">
+            </div>
+        </div>
+    </div>
+    <div class="create" (click)="handleCreate()">
+        <img src="/assets/img/create.png" alt="New">
+    </div>
+</div>
+
+<app-loading *ngIf="isLoading"></app-loading>
