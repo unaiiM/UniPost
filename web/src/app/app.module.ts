@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ProjectsComponent } from './features/components/projects/projects.component';
 import { ProjectComponent } from './features/components/project/project.component';
 import { ScreenComponent } from './features/components/screen/screen.component';
-import { ScreenService } from './apis/screen.service';
+import { ScreenService } from './core/services/screen.service';
 import { HistoryComponent } from './features/components/history/history.component';
 
 @NgModule({

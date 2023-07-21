@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ScreenService } from '@workspace/apis/screen.service';
+import { ScreenService } from '@workspace/core/services/screen.service';
 
 @Component({
   selector: 'app-screen',

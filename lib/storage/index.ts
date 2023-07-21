@@ -33,9 +33,9 @@ export default class Storage {
 
     public save() : void {
         const obj : FileStruct = {
-            screens: this.screens.all(),
-            projects: this.projects.all(),
-            history: this.history.all()
+            screens: this.screens.getAll(),
+            projects: this.projects.getAll(),
+            history: this.history.getAll()
         };
         const json : string = JSON.stringify(obj);
 

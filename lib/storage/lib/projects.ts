@@ -10,7 +10,7 @@ export default class Projects {
         this.projects = projects;
     };
 
-    public all() : PorjectsObject {
+    public getAll() : PorjectsObject {
         return this.projects;
     };
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Screen, ScreenInfo, Screens, ScreensInfo, ScreensServiceInfo } from "@ctypes/screens";
 import { ScreensService } from '@workspace/apis/screens.service';
-import { ScreenService } from '@workspace/apis/screen.service';
+import { ScreenService } from '@workspace/core/services/screen.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,6 +17,18 @@ export class ScreensComponent implements OnInit {
   public isLoading : boolean = true;
   public screensService : ScreensService;
   public screens : Screens = [];
+  public defaultScreen : Screen = {
+    name: "New window",
+    project: '',
+    description: '',
+    form: {
+      name: "New window",
+      project: '',
+      description: ''
+    },
+    show: false,
+    disabled: false
+  };
   public projects : string[] = ["Hello wold", "Some other"];
 
   public constructor(
@@ -24,10 +36,10 @@ export class ScreensComponent implements OnInit {
     private route: ActivatedRoute
   ){};
 
-  private loadScreens(){
-    const si : ScreensInfo = this.screensService.load();
-    console.log(si);
-    si.forEach((info : ScreenInfo) => {
+  private async loadScreens() : Promise<void> {
+    const screensInfo : ScreensInfo = await this.screensService.load();
+    console.log(screensInfo);
+    screensInfo.forEach((info : ScreenInfo) => {
       const screen : Screen = {
         name: info.name,
         description: info.description,
@@ -66,35 +78,28 @@ export class ScreensComponent implements OnInit {
 
   };
 
-  public handleSave(screen : Screen) : void {
+  public async handleSave(index : number) : Promise<void> {
+    const screen : Screen = this.screens[index];
+    const info : ScreenInfo = screen.form;
+    await this.screensService.modify(index, info);
     Object.assign(screen, screen.form);
     screen.show = false;
   };
 
-  public handleDelete(index : number) : void {
+  public async handleDelete(index : number) : Promise<void> {
+    await this.screensService.delete(index);
     this.screens.splice(index, 1);
+    if(this.screens.length === 0) this.handleCreate(); 
   };
 
-  public handleCreate() : void {
-    console.log(this.screens);
-    this.screens.push({
-      name: "New window",
-      project: '',
-      description: '',
-      form: {
-        name: "New window",
-        project: '',
-        description: ''
-      },
-      show: false,
-      disabled: false
-    });
+  public async handleCreate() : Promise<void> {
+    await this.screensService.create();
+    this.screens.push(this.defaultScreen);
   };
 
   public ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       const id : number = Number(paramMap.get('id'));
-      console.log(id);
       this.screenService.updateRequest("id " + id);
     });
     this.screensService = new ScreensService(this.type, this.project);

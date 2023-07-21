@@ -1,10 +1,8 @@
 import express from "express";
 import { storage, Screen, Screens } from "@lib/storage";
-import { ScreensHandler } from "../lib/globalScreensUtils";
+import utils from "../lib/utils";
 
 const router : express.Router = express.Router();
-
-router.use(express.urlencoded());
 
 router.route("/")
     .get((req : express.Request, res : express.Response) => {
@@ -34,14 +32,15 @@ router.route("/")
     });
 
 router.route("/:project")
-    .get((req : express.Request, res : express.Response) => {
+    .get((req : express.Request,  res : express.Response) => {
         const project : string = req.params.project;
         
         if(project && storage.projects.exists(project)){
-            res.json(storage.projects.get(project));
+            const screens : Screens = storage.projects.get(project);
+            res.json(screens.getAllInfo());
         }else {
             res.json({
-                error: "Project is undefined or alredy exists!"
+                error: "Project not found!"
             });
         };
     })
@@ -76,7 +75,7 @@ router.route("/:project")
 
     });
 
-router.route("/:project/screens")
+router.route("/:project/:id")
     .get((req : express.Request, res : express.Response) => {
         const project : string = req.params.project;
 
@@ -95,7 +94,7 @@ router.route("/:project/screens")
 
         if(project && storage.projects.exists(project)){
             const screens : Screens = storage.projects.get(project);
-            ScreensHandler(req, res, screens);
+            utils.screens.handleScreensAction(req, res, screens);
         }else {
             res.json({
                 error: "Project not found!"
@@ -103,7 +102,7 @@ router.route("/:project/screens")
         }; 
     });
 
-router.route("/:project/screens/:index")
+router.route("/:project/:index")
     .get((req : express.Request, res : express.Response) => {
         const project : string = req.params.project;
 
@@ -131,13 +130,29 @@ router.route("/:project/screens/:index")
 
             if(project && storage.projects.exists(project)){
                 const screens : Screens = storage.projects.get(project);
-                ScreensHandler(req, res, screens, index);
+                utils.screens.handleScreensAction(req, res, screens, index);
             }else {
                 res.json({
                     error: "Project not found!"
                 });
             }; 
     });
+
+
+function checkProjectExists(req : express.Request, res : express.Response, next : express.NextFunction){
+    const project : string = req.params.project;
+
+    if(!project || !storage.projects.exists(project)) 
+        res.json({
+            error: "Project doesn't exist"
+        })
+    else next();
+};
+
+function checkProjectScreen(req : express.Request, res : express.Response, next : express.NextFunction){
+    const project : string = req.params.project;
+    const index : number = req.params.index;
+};
 
 export default router;
 

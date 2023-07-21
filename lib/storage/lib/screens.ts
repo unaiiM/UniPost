@@ -1,6 +1,5 @@
 import { Screen, ScreenInfo } from "@shared/types/storage";
-
-interface ScreensNames {}
+import utils from "@shared/utils";
 
 export default class Screens {
     
@@ -19,14 +18,7 @@ export default class Screens {
     };
 
     public check(screen : Screen) : Screen {
-        const checked : Screen = {
-            name: screen.name,
-            project: screen.project,
-            description: screen.description,
-            request: screen.request,
-            response: screen.response
-        };
-        return checked;
+        return <Screen> utils.global.mergeProps(this.default, screen);
     };
 
     public exists(index : number) : boolean {
@@ -60,12 +52,12 @@ export default class Screens {
         return info;
     };
 
-    public add(screen? : Screen) : void {
+    public add(screen? : Partial<Screen> | undefined) : void {
         if(screen){
-            const refilledScreen : Screen = Object.assign(this.check(screen), this.default);
+            const refilledScreen : Screen = Object.assign(this.check(<Screen> screen), this.default);
             this.screens.push(refilledScreen);
-            this.length++;
         }else this.screens.push(Object.assign({}, this.default));
+        this.length++;
     };
 
     public join(screens : Screen[]) : void {
@@ -82,12 +74,7 @@ export default class Screens {
     public modify(index : number, screen : Partial<Screen>) : boolean {
         if(!this.exists(index)) return false;
         const obj : Screen = this.screens[index];
-        if(screen.name) obj.name = screen.name;
-        if(screen.project) obj.name = screen.project;
-        if(screen.description) obj.description = screen.description;
-        if(screen.request) obj.request = screen.request;
-        if(screen.response) obj.response = screen.response;
-
+        utils.global.mergePropsReference(obj, screen);
         return true;
     };
 

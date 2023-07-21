@@ -23,7 +23,7 @@
             <div class="button delete" (click)="handleDelete(i)">
                 <img src="/assets/img/trash.png" alt="Delete"/>
             </div>
-            <div class="button save" (click)="handleSave(screen)">
+            <div class="button save" (click)="handleSave(i)">
                 <img src="/assets/img/check.png" alt="Save"/>
             </div>
             <div class="button open" [routerLink]="path + '/' + i.toString()">

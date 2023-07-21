@@ -32,7 +32,8 @@ Indicate the desired action to be performed on the identified resource.
 - Add proxy configuration (Socks, Http) [-] 
 
 # Pending last
-- We worked with frontend style and funcionalities but we stayed modifing the api that involves mostly the storage library.
+- Worked with frontend style and funcionalities but we stayed modifing the api and the storage library because the changes done 
+in the frontend to start linking the frontend with the api.
 That means need to modify and add code from storage and api the same structure with the aplied in the frontend funcionalities.
 - The problems that I have is making partial the screen, that means the user can send to the api only the name and the storage
 will only modify the name. Another problem is deleting extra propreties that the user can send and we don't want.

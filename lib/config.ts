@@ -10,8 +10,8 @@ export interface InitConfig {
     IMPORT_PATH : string;
     CONFIG_FILE : string;
     API_LISTEN_PORT : boolean;
-    API_PORT : number;
     API_URL_PATH : string;
+    API_PORT : number;
     API_HOST : string;
     WEB_PATH : string;
     WEB_PORT : number;
@@ -67,22 +67,22 @@ class Config implements InitConfig {
 
     private setDefaultValues() : void {
         const values : Omit<InitConfig, "BASE_PATH"> = {
-            IMPORT_PATH : "/build",
-            CONFIG_FILE : "/assets/json/config.json",
-            API_LISTEN_PORT : false,
-            API_URL_PATH : "/api",
-            API_PORT : 8080,
-            API_HOST : "0.0.0.0",
-            WEB_PATH : "/app/dist/app",
-            WEB_PORT : 80,
-            WEB_HOST : "0.0.0.0",
-            ONLY_API : false,
-            WS_HOST : "0.0.0.0",
-            WS_PORT : 4444,
-            MAX_HISTORY_SCREENS : 12,
-            MAX_PROJECTS : 12,
-            MAX_SCREENS : 32,
-            STORAGE_FILE : "/assets/json/storage.json"
+            IMPORT_PATH: "/build",
+            CONFIG_FILE: "/assets/json/config.json",
+            API_LISTEN_PORT: false,
+            API_URL_PATH: "/api",
+            API_PORT: 8080,
+            API_HOST: "0.0.0.0",
+            WEB_PATH: "/web",
+            WEB_PORT: 80,
+            WEB_HOST: "0.0.0.0",
+            ONLY_API: false,
+            WS_HOST: "0.0.0.0",
+            WS_PORT: 4444,
+            MAX_HISTORY_SCREENS: 12,
+            MAX_PROJECTS: 12,
+            MAX_SCREENS: 32,
+            STORAGE_FILE: "/assets/json/storage.json"
         };
         this.joinBasePath(values);
         Object.assign(this, values);
@@ -93,7 +93,6 @@ class Config implements InitConfig {
         
         this.IMPORT_PATH = this.BASE_PATH + this.IMPORT_PATH;
         this.CONFIG_FILE = this.BASE_PATH + this.CONFIG_FILE;
-        this.WEB_PATH = this.BASE_PATH + this.WEB_PATH;
         this.STORAGE_FILE = this.BASE_PATH + this.STORAGE_FILE;
     };
 
@@ -104,4 +103,4 @@ const config : Config = new Config({
 });
 config.load();
 config.save();
-export default <Config> config;
+export default config;

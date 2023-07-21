@@ -21,3 +21,11 @@ export type Screens = Screen[];
 export type ScreensInfo = ScreenInfo[];
 export type ScreensUnion = ScreenInfo[] | 
     ProjectInfo[];
+
+export interface APIMessage {
+    message : string;
+};
+
+export interface APIError {
+    error : string;
+};

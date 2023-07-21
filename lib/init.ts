@@ -1,12 +1,12 @@
 import config from "@lib/config";
-import { Express } from "express";
+import express from "express";
 import WebSocket from "@wss";
 
 export default class Init {
 
     public constructor(
-        private web : Express,
-        private api : Express,
+        private web : express.Express,
+        private api : express.Express,
         private wss : WebSocket
     ){};
 
@@ -25,13 +25,16 @@ export default class Init {
     };
 
     public loadAPI() : void {
-        if(config.API_LISTEN_PORT){
-            this.api.listen(config.API_PORT, config.API_HOST, () => {
+        if(config.API_LISTEN_PORT || config.ONLY_API){
+            const app : express.Express = express();
+            app.use(config.API_URL_PATH, this.api);
+            app.listen(config.API_PORT, config.API_HOST, () => {
                 console.log("API server sucessfully started at " + config.API_HOST + ":" + config.API_PORT);
             });
-        } else 
+        }else {
             this.web.use(config.API_URL_PATH, this.api);
             console.log("API sucessfully vinculed with web server!");
+        };
     };
 
     public loadWSS() : void {

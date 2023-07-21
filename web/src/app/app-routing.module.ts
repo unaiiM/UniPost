@@ -6,7 +6,7 @@ import { ProjectComponent } from './features/components/project/project.componen
 import { HistoryComponent } from './features/components/history/history.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'screens', pathMatch: "full" },
+  { path: '', redirectTo: 'screens/0', pathMatch: "full" },
   { path: 'screens', redirectTo: "screens/0" },
   { path: 'screens/:id', component: ScreensComponent },
   { path: 'projects', children: [

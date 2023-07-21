@@ -1,50 +1,47 @@
-import { ScreensInfo, ScreensServiceInfo } from "@workspace/types/screens";
+import { APIError, APIMessage, ScreenInfo, ScreensInfo } from "@workspace/types/screens";
+import api from "./api.service";
 
 export class ScreensService {
 
+    private screensPath : string;
+
     public constructor(private type : string, private project? : string | undefined){
         if(!this.project) this.project = '';
+        this.getScreensPath();
     };
 
-    public load() : ScreensInfo {
+    public getScreensPath() : void {
         switch(this.type){
             case 'project':
-                return this.loadProjectScreens();
+                this.screensPath = "/projects/" + this.project;
+                break;
             case 'history':
-                return this.loadHistoryScreens();
+                this.screensPath = "/history";
+                break;
             default:
-                return this.loadScreens();
+                this.screensPath = "/screens";
+                break;
         };
     };
 
-    private loadScreens() : ScreensInfo {
-        const screens : ScreensInfo = [{
-            name: "New window",
-            project: '',
-            description: ''
-        }];
+    public async load() : Promise<ScreensInfo> {
+        const screens : object = await api.get(this.screensPath);
+        return <ScreensInfo> screens;
+    };
 
-        return screens;
-    };  
+    public async create() : Promise<APIError | APIMessage> {
+        const response : object = await api.post(this.screensPath, { action: 'add' });
+        return <APIError | APIMessage> response;
+    };
+    
+    public async delete(index : number) : Promise<APIError | APIMessage> {
+        const response : object = await api.post(this.screensPath + "/" + index, { action: 'delete'});
+        return <APIError | APIMessage> response;
+    };
 
-    private loadProjectScreens() : ScreensInfo {
-        const screens : ScreensInfo = [{
-            name: "New window",
-            project: this.project,
-            description: ''
-        }];
-
-        return screens;
-    };  
-
-    private loadHistoryScreens() : ScreensInfo {
-        const screens : ScreensInfo = [{
-            name: "New window (History)",
-            project: this.project,
-            description: ''
-        }];
-
-        return screens;
-    };  
+    public async modify(index : number, info : ScreenInfo) : Promise<APIError | APIMessage> {
+        const response : object = await api.post(this.screensPath + "/" + index, { action: 'modify', screen: info });
+        return <APIError | APIMessage> response;
+    };
 
 };
