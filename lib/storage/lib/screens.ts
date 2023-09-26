@@ -1,7 +1,8 @@
 import { Screen, ScreenInfo } from "@shared/types/storage";
 import utils from "@shared/utils";
+import ListInterface from "./list";
 
-export default class Screens {
+export default class Screens implements ListInterface {
     
     private screens : Screen[] = [];
     public length : number = 0;
@@ -30,9 +31,7 @@ export default class Screens {
     };
 
     public names() : string[] {
-        let names : string[] = [];
-        this.screens.forEach((screen : Screen) => names.push(screen.name));
-        return names;
+        return this.screens.map((screen : Screen) => screen.name);
     };
 
     public get(index : number) : Screen {
@@ -62,6 +61,7 @@ export default class Screens {
 
     public join(screens : Screen[]) : void {
         this.screens = this.screens.concat(screens);
+        this.length = this.screens.length;
     };
 
     public delete(index : number) : boolean {

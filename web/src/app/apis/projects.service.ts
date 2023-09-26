@@ -1,35 +1,18 @@
 import { APIError, APIMessage, ScreenInfo, ScreensInfo } from "@workspace/types/screens";
 import api from "./api.service";
 
-export class ScreensService {
+export class ProjectsService {
 
-    private screensPath : string;
+    private projectsPath : string = "/projects";
 
-    public constructor(private type : string, private project? : string | undefined){
-        if(!this.project) this.project = '';
-        this.getScreensPath();
-    };
-
-    public getScreensPath() : void {
-        switch(this.type){
-            case 'project':
-                this.screensPath = "/projects/" + this.project;
-                break;
-            case 'history':
-                this.screensPath = "/history";
-                break;
-            default:
-                this.screensPath = "/screens";
-                break;
-        };
-    };
+    public constructor(){};
 
     public async load() : Promise<ScreensInfo> {
-        const screens : object = await api.get(this.screensPath);
+        const screens : object = await api.get(this.projectsPath);
         return <ScreensInfo> screens;
     };
 
-    public async create() : Promise<APIError | APIMessage> {
+    public async create(project) : Promise<APIError | APIMessage> {
         const response : object = await api.post(this.screensPath, { action: 'add' });
         return <APIError | APIMessage> response;
     };

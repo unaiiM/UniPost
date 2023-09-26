@@ -1,11 +1,11 @@
 import config from "@lib/config";
 import Screens, { Screen } from "./lib/screens";
-import Projects, { PorjectsObject } from "./lib/projects";
+import Projects, { ProjectsList } from "./lib/projects";
 import * as fs from "fs";
 
 interface FileStruct {
     screens : Screen[];
-    projects : PorjectsObject;
+    projects : ProjectsList;
     history : Screen[];
 };
 

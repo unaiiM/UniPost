@@ -9,6 +9,7 @@ export function getScreenFromRequest(req : express.Request) : Partial<Screen> | 
 };
 
 export function addScreenRouter(router : express.Router, screens : Screens) : void {
+    
     router.route("/")
         .get((req : express.Request, res : express.Response) => {   
             console.log(screens.getAllInfo());          
@@ -19,21 +20,27 @@ export function addScreenRouter(router : express.Router, screens : Screens) : vo
         });
 
     router.route("/:index")
-        .get((req : express.Request, res : express.Response) => {
+        .get(checkScreenExits, (req : express.Request, res : express.Response) => {
             const index : number = Number(req.params.index);
-                
-            if(screens.exists(index)){
-                const screen : Screen = screens.get(index);
-                
-                res.json(screen);
-            }else res.json({
-                error: "Screen not found!"
-            });
+            const screen : Screen = screens.get(index);
+
+
         })
         .post((req : express.Request, res : express.Response) => {
             const index : number = Number(req.params.index);
             handleScreensAction(req, res, screens,index);
         });
+
+    function checkScreenExits(req : express.Request, res : express.Response, next : express.NextFunction){
+        const index : number = Number(req.params.index);
+    
+        if(screens.exists(index)){
+            next();
+        }else res.json({
+            error: "Screen not found!"
+        });
+    };
+
 };
 
 export function handleScreensAction(req : express.Request, res : express.Response, 
