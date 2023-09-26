@@ -30,7 +30,6 @@ Indicate the desired action to be performed on the identified resource.
 - Maybe divide BASE_PATH from InitConfig interface and passed as parameter in Config class contructor. [-]
 - Add config API, WEB, APP interface for metadata (current version, and other data related to the program). [-]
 - Add proxy configuration (Socks, Http) [-] 
-- Create a new class to share list common methods in storage with projects and screens. [-][!]
 
 # Pending last
 - Worked with frontend style and funcionalities but we stayed modifing the api and the storage library because the changes done 
@@ -38,6 +37,6 @@ in the frontend to start linking the frontend with the api.
 That means need to modify and add code from storage and api the same structure with the aplied in the frontend funcionalities.
 - The problems that I have is making partial the screen, that means the user can send to the api only the name and the storage
 will only modify the name. Another problem is deleting extra propreties that the user can send and we don't want.
+- Finish API routers middlewares.
 - Finish frontend and API linking.
 - Check shared types with backend and forntend.
-- Verify last changes with the API 
